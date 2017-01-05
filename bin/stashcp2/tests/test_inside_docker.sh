@@ -47,6 +47,17 @@ fi
 
 rm query1
 
+# Try copying with different destintion filename
+/StashCache/bin/stashcp --cache=$XRD_CACHE -d /user/dweitzel/public/blast/queries/query1 query.test
+
+result=`md5sum query.test | awk '{print $1;}'`
+
+if [ "$result" != "12bdb9a96cd5e8ca469b727a81593201" ]; then
+  exit 1
+fi
+
+rm -f query.test
+
 # Perform tests
 /StashCache/bin/stashcp --cache=$XRD_CACHE -d /user/dweitzel/public/blast/queries/query1 ./
 
